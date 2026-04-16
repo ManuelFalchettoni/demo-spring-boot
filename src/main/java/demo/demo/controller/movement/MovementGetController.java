@@ -1,6 +1,6 @@
 package demo.demo.controller.movement;
 
-import demo.demo.dto.request.response.movement.MovementResponse;
+import demo.demo.dto.response.movement.MovementResponse;
 import demo.demo.model.movement.Movement;
 import demo.demo.service.movement.MovementFinderService;
 import org.springframework.http.ResponseEntity;
