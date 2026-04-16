@@ -1,4 +1,4 @@
-package demo.demo.dto.request.response.movement;
+package demo.demo.dto.response.movement;
 
 public class MovementResponse {
     //Instanciar
