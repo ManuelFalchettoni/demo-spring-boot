@@ -5,6 +5,8 @@ import demo.demo.model.movement.Movement;
 import demo.demo.repository.movement.JpaMovementRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service //Anotacion
 public class MovementFinderService {
     //Inicializar e Instanciar
@@ -19,12 +21,14 @@ public class MovementFinderService {
     }
 
     //Servicio (Desde el servicio siempre pasamos la entidad al controller)
+    //Lambda es una funcion sin nombre ni cuerpo [ () -> ]
     public Movement find(Long id){
         //[Funcion Lambda () -> ]
         return jpaMovementRepository.findById(id)
                 .orElseThrow( () -> new MovementNotFoundException(id)); //Lambda
     }
-    //Lambda es una funcion sin nombre ni cuerpo [ () -> ]
 
-
+    public  List<Movement>  finds(){
+        return jpaMovementRepository.findAll();
+    }
 }
