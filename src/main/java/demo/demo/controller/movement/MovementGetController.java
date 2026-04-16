@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/movements")
-public class MovementGetController {
+public class
+MovementGetController {
     //Instanciar
     private final MovementFinderService movementFinderService;
     private final MovementMapper movementMapper;
