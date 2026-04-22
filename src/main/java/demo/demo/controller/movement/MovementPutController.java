@@ -14,18 +14,16 @@ import org.springframework.web.bind.annotation.*;
 public class MovementPutController {
     //Instanciar
     private final MovementUpdaterService movementUpdaterService;
-    private final MovementMapper movementMapper;
 
     //Inicializar
     public MovementPutController (MovementUpdaterService movementUpdaterService, MovementMapper movementMapper){
         this.movementUpdaterService = movementUpdaterService;
-        this.movementMapper = movementMapper;
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MovementResponse> update(@RequestBody MovementRequest movementRequest, @PathVariable Long id){
         Movement movement = movementUpdaterService.update(id, movementRequest.getName(), movementRequest.getDescription());
-        MovementResponse response = movementMapper.convertor(movement);
+        MovementResponse response = MovementMapper.convertor(movement);
         return ResponseEntity.ok(response);
     }
 }

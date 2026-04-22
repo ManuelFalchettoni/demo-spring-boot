@@ -18,19 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovementPostController {
     //Instanciar
     private final MovementCreatorService movementCreatorService;
-    private final MovementMapper movementMapper;
 
     //Inicializar con cosntructor
-    public MovementPostController(MovementCreatorService movementCreatorService, MovementMapper movementMapper){
+    public MovementPostController(MovementCreatorService movementCreatorService){
         this.movementCreatorService = movementCreatorService;
-        this.movementMapper = movementMapper;
     }
 
     @PostMapping //Mapping con el tipo de request que estamos usando
     public ResponseEntity<MovementResponse> create(@RequestBody MovementRequest movementRequest){
-        Movement movement = movementMapper.toEntity(movementRequest);
-        Movement savedMovement = movementCreatorService.create(movement);
-        MovementResponse response = movementMapper.convertor(savedMovement);//Set description
+        Movement savedMovement = movementCreatorService.create(movementRequest);
+        MovementResponse response = MovementMapper.convertor(savedMovement);
         return ResponseEntity.status(HttpStatus.CREATED).body(response); //Devolvemos Response con status, a traves del body, utilizando el service de creator
     }
 }

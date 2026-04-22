@@ -1,6 +1,8 @@
 package demo.demo.service.movement;
 
 
+import demo.demo.dto.request.movement.MovementRequest;
+import demo.demo.mapper.movement.MovementMapper;
 import demo.demo.model.movement.Movement;
 import demo.demo.repository.movement.JpaMovementRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,8 @@ public class MovementCreatorService {
         this.jpaMovementRepository = jpaMovementRepository;
     }
     //El servicio
-    public Movement create(Movement movement){ //Paso nu movement pero tambein me devuelve otro movement
+    public Movement create(MovementRequest movementRequest){
+        Movement movement = MovementMapper.toEntity(movementRequest);
         return jpaMovementRepository.save(movement);
     } //Usamos una de las funciones dentro de JPA
 }

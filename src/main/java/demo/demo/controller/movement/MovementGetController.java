@@ -16,18 +16,16 @@ public class
 MovementGetController {
     //Instanciar
     private final MovementFinderService movementFinderService;
-    private final MovementMapper movementMapper;
     //Inicializar con constructor
-    public MovementGetController(MovementFinderService movementFinderService, MovementMapper movementMapper){
+    public MovementGetController(MovementFinderService movementFinderService){
         this.movementFinderService = movementFinderService;
-        this.movementMapper = movementMapper;
     }
 
 
     @GetMapping("/{id}") //Se usara todo despues de la barra como paramatero para el ID
     public ResponseEntity<MovementResponse> find(@PathVariable Long id){ //Devolvemos un ResponseEntity
         Movement movement = movementFinderService.find(id); //Guardamos la entidad que nos devulve el service con ese id
-        MovementResponse response = movementMapper.convertor(movement);//Creamos una nueva entidad guardando los atributos que necesitamos, e ignorando los que no
+        MovementResponse response = MovementMapper.convertor(movement);//Creamos una nueva entidad guardando los atributos que necesitamos, e ignorando los que no
         return ResponseEntity.ok(response); //Devolvemos el ResponseEntity con OK
     }
 
