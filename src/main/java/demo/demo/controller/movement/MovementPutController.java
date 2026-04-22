@@ -16,7 +16,7 @@ public class MovementPutController {
     private final MovementUpdaterService movementUpdaterService;
 
     //Inicializar
-    public MovementPutController (MovementUpdaterService movementUpdaterService, MovementMapper movementMapper){
+    public MovementPutController (MovementUpdaterService movementUpdaterService){
         this.movementUpdaterService = movementUpdaterService;
     }
 
