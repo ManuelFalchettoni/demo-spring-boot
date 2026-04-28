@@ -1,6 +1,7 @@
 package demo.demo.service.product;
 
 import demo.demo.exception.movement.MovementNotFoundException;
+import demo.demo.exception.product.ProductNotFoundException;
 import demo.demo.model.product.Product;
 import demo.demo.repository.product.JpaProductRepository;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,7 @@ public class ProductFinderService {
 
     public Product find(Long id){
         return jpaProductRepository.findById(id)
-                .orElseThrow( () -> new MovementNotFoundException(id));
+                .orElseThrow( () -> new ProductNotFoundException(id));
     }
 
 }
