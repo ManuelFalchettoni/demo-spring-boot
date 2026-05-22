@@ -3,6 +3,7 @@ package demo.demo.controller.product;
 import demo.demo.dto.request.product.ProductRequest;
 import demo.demo.dto.response.product.ProductResponse;
 import demo.demo.service.product.ProductUpdaterService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,8 @@ public class ProductPutController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponse> update(@RequestBody ProductRequest request, @PathVariable Long id){
+    public ResponseEntity<ProductResponse> update(@Valid @RequestBody ProductRequest request,
+                                                  @PathVariable Long id){
         ProductResponse response = productUpdaterService.update(request, id);
         return ResponseEntity.ok(response);
     }

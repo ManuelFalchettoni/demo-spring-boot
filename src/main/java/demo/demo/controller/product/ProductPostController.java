@@ -3,6 +3,7 @@ package demo.demo.controller.product;
 import demo.demo.dto.request.product.ProductRequest;
 import demo.demo.dto.response.product.ProductResponse;
 import demo.demo.service.product.ProductCreatorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class ProductPostController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest request){
+    public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductRequest request){
         ProductResponse response = productCreatorService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

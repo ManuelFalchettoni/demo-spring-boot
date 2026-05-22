@@ -1,7 +1,9 @@
 package demo.demo.dto.request.product;
 
-public class ProductRequest {
+import jakarta.validation.constraints.NotBlank;
 
+public class ProductRequest {
+    @NotBlank
     private String name;
     private String description;
     private Float price;
