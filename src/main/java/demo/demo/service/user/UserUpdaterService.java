@@ -3,24 +3,36 @@ package demo.demo.service.user;
 import demo.demo.dto.request.user.UserRequest;
 import demo.demo.model.user.User;
 import demo.demo.repository.user.JpaUserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserUpdaterService {
     private final JpaUserRepository jpaUserRepository;
     private final UserFinderService userFinderService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserUpdaterService(JpaUserRepository jpaUserRepository, UserFinderService userFinderService) {
+    public UserUpdaterService(
+            JpaUserRepository jpaUserRepository,
+            UserFinderService userFinderService,
+            PasswordEncoder passwordEncoder
+    ) {
         this.jpaUserRepository = jpaUserRepository;
         this.userFinderService = userFinderService;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public User update(UserRequest request, Long id){
+    public User update(UserRequest userRequest, Long id) {
         User user = userFinderService.find(id);
-        user.setDni(request.getDni());
-        user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
-        user.setUsername(request.getUsername());
+
+        user.setUsername(userRequest.getUsername());
+        user.setEmail(userRequest.getEmail());
+        user.setDni(userRequest.getDni());
+
+        if (userRequest.getPassword() != null && !userRequest.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        }
+
         return jpaUserRepository.save(user);
     }
 }
